@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* --- MAIN LAYOUT AND HEADERS --- */
+
+body {
+    background-color: #001F54; /* Navy Blue */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.tournament-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.tournament-header h1 {
+    font-size: 2.5em;
+    color: #FFD700; /* Golden Yellow */
+    margin: 20px 0 30px 0;
+    text-align: center;
+}
+
+/* --- KEY CONTAINER (BRACKET) --- */
+
+.bracket-wrapper {
+    /* Flex to arrange the rounds side by side. */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align the rounds at the top. */
+    gap: 40px; 
+    padding: 20px;
+    overflow-x: auto; /* Allows horizontal scrolling on small screens. */
+}
+
+/* Style for each round's column */
+.round {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
+}
+
+/* Adjust the vertical spacing between matchups for later rounds. */
+.round-2 .match {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.round-3 .match {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+/* --- THE CONFRONTATION (MATCH) --- */
+
+.match {
+    position: relative;
+    width: 250px;
+    min-height: 60px;
+}
+
+/* The Player (PLAYER DIV) */
+.player {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #2b3a5b; /* A lighter Blue for the player's block. */
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 2px; 
+    transition: background-color 0.2s, transform 0.1s;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.player:hover {
+    background-color: #4a5c80; 
+    transform: scale(1.02);
+}
+
+.player-name {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* CONNECTION LINES AND SWITCHES */
+
+.match-line {
+    /* A line connecting the two players leads to the next round. */
+    position: absolute;
+    right: -20px; /* Position for the next column */
+    top: 50%;
+    width: 20px;
+    height: 1px;
+    background-color: #ffffff;
+    z-index: 10;
+}
+
+.match-line::before,
+.match-line::after {
+    /* The keys (corner lines) */
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    width: 1px;
+    height: calc(50% + 21px); 
+    right: 0;
+}
+
+.match-line::before {
+    top: -20px;
+    border-top-right-radius: 4px;
+}
+
+.match-line::after {
+    bottom: -20px;
+    border-bottom-right-radius: 4px;
+}
+
+/* Visual correction for the final round (Final) */
+.round:last-child .match-line,
+.round:last-child .match-line::before,
+.round:last-child .match-line::after {
+    background-color: transparent; /* Remove lines from the last matchup. */
+    width: 0;
+}
+
+
+/* --- RESULT STYLIZATION (JS INJECTED) --- */
+
+/* WINNER: Green name, soft Green background */
+.player.winner {
+    background-color: #4CAF50; /* Dark Green */
+    color: #ffffff;
+    cursor: default;
+    border-color: #388E3C;
+}
+.player.winner:hover {
+    background-color: #4CAF50;
+    transform: none;
+}
+
+/* LOSER: Name crossed out in Red */
+.player.loser {
+    background-color: #422933; /* Darker background for the loser. */
+    color: #FF5252; /* Light Red */
+    text-decoration: line-through;
+    opacity: 0.6;
+    cursor: default;
+    border-color: #D32F2F;
+}
+.player.loser:hover {
+    background-color: #422933;
+    transform: none;
+}
+
+/* --- BYE (Automatic Passage) --- */
+
+.bye-match .player[data-player-name="BYE"] {
+    background-color: #333333;
+    color: #999999;
+    font-style: italic;
+    cursor: default;
+    opacity: 0.8;
+}
+
+.bye-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #FFD700;
+    color: #000000;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: bold;
+    z-index: 20;
+}
+
+
+/* --- CHAMPION'S DISPLAY (Injected by JS after the Final) --- */
+
+.champion-display-final {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    margin-top: 100px;
+    background-color: #1D7048; 
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border: 5px solid #FFD700;
+}
+
+.champion-display-final h1 {
+    font-size: 3em;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.champion-display-final h2 {
+    font-size: 2em;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.champion-display-final button {
+    background-color: #FFA500;
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.champion-display-final button:hover {
+    background-color: #FF8C00;
+}
+
+/* ============================================
+   MEDIA QUERIES - RESPONSIVE
+   ============================================ 
+*/
+
+@media (max-width: 728px) {
+    .tournament-header h1 {
+        font-size: 2em;
+        margin: 16px 0 24px 0;
+    }
+
+    .bracket-wrapper {
+        gap: 30px;
+        padding: 16px;
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+
+    .round {
+        gap: 30px;
+    }
+
+    .match {
+        width: 220px;
+        min-height: 50px;
+    }
+
+    .player {
+        padding: 6px 12px;
+        font-size: 0.95em;
+        margin-bottom: 2px;
+    }
+
+    .match-line {
+        right: -15px;
+        width: 15px;
+    }
+
+    .bye-label {
+        font-size: 0.65em;
+        padding: 2px 6px;
+    }
+
+    .champion-display-final {
+        padding: 40px;
+        margin-top: 80px;
+    }
+
+    .champion-display-final h1 {
+        font-size: 2em;
+        margin-bottom: 8px;
+    }
+
+    .champion-display-final h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .champion-display-final button {
+        padding: 12px 24px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .tournament-screen {
+        padding: 14px;
+    }
+
+    .tournament-header h1 {
+        font-size: 1.5em;
+        margin: 12px 0 18px 0;
+    }
+
+    .bracket-wrapper {
+        gap: 20px;
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    .round {
+        gap: 20px;
+    }
+
+    .round-2 .match {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .round-3 .match {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .match {
+        width: 180px;
+        min-height: 45px;
+    }
+
+    .player {
+        padding: 6px 10px;
+        font-size: 0.85em;
+        margin-bottom: 1px;
+        border-radius: 4px;
+    }
+
+    .player-name {
+        font-size: 0.85em;
+    }
+
+    .match-line {
+        right: -10px;
+        width: 10px;
+        height: 1px;
+    }
+
+    .match-line::before,
+    .match-line::after {
+        height: calc(50% + 15px);
+    }
+
+    .bye-label {
+        font-size: 0.6em;
+        padding: 2px 4px;
+        left: 6px;
+    }
+
+    .champion-display-final {
+        padding: 30px;
+        margin-top: 60px;
+        border: 3px solid #FFD700;
+    }
+
+    .champion-display-final h1 {
+        font-size: 1.5em;
+        margin-bottom: 6px;
+    }
+
+    .champion-display-final h2 {
+        font-size: 1.2em;
+        margin-bottom: 16px;
+    }
+
+    .champion-display-final button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 320px) {
+    .tournament-screen {
+        padding: 10px;
+    }
+
+    .tournament-header h1 {
+        font-size: 1.2em;
+        margin: 8px 0 14px 0;
+    }
+
+    .bracket-wrapper {
+        gap: 12px;
+        padding: 8px;
+        overflow-x: auto;
+    }
+
+    .round {
+        gap: 12px;
+    }
+
+    .round-2 .match {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    .round-3 .match {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .match {
+        width: 140px;
+        min-height: 40px;
+    }
+
+    .player {
+        padding: 4px 8px;
+        font-size: 0.75em;
+        margin-bottom: 1px;
+        border-radius: 3px;
+    }
+
+    .player-name {
+        font-size: 0.75em;
+    }
+
+    .match-line {
+        right: -8px;
+        width: 8px;
+        height: 1px;
+    }
+
+    .match-line::before,
+    .match-line::after {
+        height: calc(50% + 12px);
+    }
+
+    .bye-label {
+        font-size: 0.55em;
+        padding: 1px 3px;
+        left: 4px;
+    }
+
+    .champion-display-final {
+        padding: 20px;
+        margin-top: 40px;
+        border: 2px solid #FFD700;
+        border-radius: 10px;
+    }
+
+    .champion-display-final h1 {
+        font-size: 1.1em;
+        margin-bottom: 4px;
+    }
+
+    .champion-display-final h2 {
+        font-size: 1em;
+        margin-bottom: 12px;
+    }
+
+    .champion-display-final button {
+        padding: 8px 16px;
+        font-size: 0.8em;
+    }
+}
