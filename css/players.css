@@ -276,7 +276,7 @@ h3 {
     #new-player {
         padding: 10px;
         font-size: 0.9em;
-        width: 100%;
+        width: 95%;
     }
 
     .player-inputs button {
@@ -350,7 +350,7 @@ h3 {
     #new-player {
         padding: 8px;
         font-size: 0.85em;
-        width: 100%;
+        width: 95%;
     }
 
     .player-inputs button {
