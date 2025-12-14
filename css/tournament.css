@@ -238,11 +238,26 @@ body {
 
     .match-line {
         right: -12px;
+        top: 30px;
         width: 12px;
+    }
+
+    .match-line::before {
+        top: -30px;
+        height: 35px;
+    }
+
+    .match-line::after {
+        bottom: -35px;
+        height: 30px;
     }
 
     .tournament-header h1 {
         font-size: 1.8em;
+    }
+
+    .bye-label {
+        font-size: 0.45em;
     }
 
 }
@@ -266,11 +281,27 @@ body {
 
     .match-line {
         right: -8px;
+        top: 30px;
         width: 8px;
+    }
+
+    
+    .match-line::before {
+        top: -25px;
+        height: 25px;
+    }
+
+    .match-line::after {
+        bottom: -25px;
+        height: 25px;
     }
 
     .tournament-header h1 {
         font-size: 1.4em;
+    }
+
+    .bye-label {
+        font-size: 0.35em;
     }
 
 }
@@ -293,8 +324,23 @@ body {
     .round-4 { --round-gap: 175px; }
 
     .match-line {
-        right: -6px;
+        right: -10px;
+        top: 25px;
         width: 6px;
+    }
+
+    .match-line::before {
+        top: -20px;
+        height: 20px;
+    }
+
+    .match-line::after {
+        bottom: -20px;
+        height: 20px;
+    }
+
+    .bye-label {
+        font-size: 0.25em;
     }
 
 }
@@ -317,12 +363,26 @@ body {
     .round-4 { --round-gap: 145px; }
 
     .match-line {
-        right: -5px;
+        right: -8px;
         width: 5px;
+    }
+
+    .match-line::before {
+        top: -20px;
+        height: px;
+    }
+
+    .match-line::after {
+        bottom: -20px;
+        height: 20px;
     }
 
     .tournament-header h1 {
         font-size: 1em;
+    }
+
+    .bye-label {
+        font-size: 0.20em;
     }
 }
 
@@ -343,11 +403,27 @@ body {
     .round-4 { --round-gap: 145px; }
 
     .match-line {
-        right: -5px;
-        width: 5px;
+        right: -9px;
+        top: 20px;
+        width: 10px;
+    }
+
+    .match-line::before {
+        top: -20px;
+        height: px;
+    }
+
+    .match-line::after {
+        bottom: -20px;
+        height: 20px;
     }
 
     .tournament-header h1 {
         font-size: 1em;
+    }
+    
+    .bye-label {
+        padding: 1.5px 0;
+        font-size: 0.17em;
     }
 }
