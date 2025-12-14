@@ -31,7 +31,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: stretch;
-    gap: 40px;
+    gap: 30px;
     padding: 30px;
     overflow-x: auto;
 }
@@ -43,8 +43,8 @@ body {
     gap: var(--round-gap);
 }
 
-.round-1 { --round-gap: 30px; }
-.round-2 { --round-gap: 110px; }
+.round-1 { --round-gap: 80px; }
+.round-2 { --round-gap: 58px; }
 .round-3 { --round-gap: 250px; }
 .round-4 { --round-gap: 520px; }
 
