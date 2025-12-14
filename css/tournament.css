@@ -31,6 +31,7 @@ body {
     /* Flex to arrange the rounds side by side. */
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     gap: 20px; 
     padding: 28px;
     margin-top: 50px; /* Add top margin to move boxes down */

@@ -186,10 +186,24 @@ function advanceWinner(matchID, winnerName) {
         // Ensures that the newly filled slot is not clickable.
         targetSlot.onclick = null;
 
-        // 5. Next Match Clickability Control
+        
+// =======================================================================
+        // LÓGICA DE CORREÇÃO (BYE vs BYE AUTO-ADVANCE em R2+)
+        // =======================================================================
 
         const topName = topSlot.dataset.playerName;
         const bottomName = bottomSlot.dataset.playerName;
+
+        if (topName === 'BYE' && bottomName === 'BYE') {
+            console.warn(`[R2+ Auto-Advance] BYE vs BYE detectado em ${nextMatchID}. Avançando um BYE.`);
+            // Chama a função para avançar o BYE e DEPOIS RETORNA.
+            setTimeout(() => advanceWinner(nextMatchID, 'BYE'), 100);
+            return; // <<-- ESSENCIAL: Interrompe o processamento para este match.
+        }
+        
+        // =======================================================================
+        // 5. Next Match Clickability Control
+        // =======================================================================
 
         // Generic click function for the next match.
         const matchClickHandler = function () {
@@ -197,12 +211,12 @@ function advanceWinner(matchID, winnerName) {
         };
 
         // The match becomes clickable only if BOTH slots are filled (not marked with '?').
-        // Clicking is allowed even if there is a "BYE" in the matchup (e.g., Player vs. BYE)..
         if (topName !== '?' && bottomName !== '?') {
 
             console.log(`Match ${nextMatchID} ready! (R2+ logic)`);
 
             // Allows click on both, but registerWinner will block click on "BYE"
+            // Note: If one is 'BYE' and the other is a Player, only the Player is truly clickable due to registerWinner.
             topSlot.onclick = matchClickHandler;
             bottomSlot.onclick = matchClickHandler;
 
