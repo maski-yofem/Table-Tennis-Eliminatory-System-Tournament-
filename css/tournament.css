@@ -265,6 +265,11 @@ body {
         font-size: 0.45em;
     }
 
+    .champion-display-final h1 {
+        font-size: 2em;
+        color: #FFD700;
+    }
+
 }
 
 /* -------- SMALL MOBILE -------- */
@@ -353,6 +358,11 @@ body {
         font-size: 0.25em;
     }
 
+    .champion-display-final h1 {
+        font-size: 1.8em;
+        color: #FFD700;
+    }
+
 }
 
 /* -------- ULTRA SMALL -------- */
@@ -393,6 +403,15 @@ body {
 
     .bye-label {
         font-size: 0.20em;
+    }
+
+    .champion-display-final h1 {
+        font-size: 1.2em;
+        color: #FFD700;
+    }
+
+    .champion-display-final button {
+        padding: 12px 20px;
     }
 }
 
@@ -436,4 +455,15 @@ body {
         padding: 1.5px 0;
         font-size: 0.17em;
     }
+
+    .champion-display-final h1 {
+        font-size: .8em;
+        color: #FFD700;
+    }
+
+    .champion-display-final button {
+        padding: 12px 12px;
+        font-size: 8px;
+    }
+
 }
