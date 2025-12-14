@@ -187,23 +187,20 @@ function advanceWinner(matchID, winnerName) {
         targetSlot.onclick = null;
 
         
-// =======================================================================
-        // LÓGICA DE CORREÇÃO (BYE vs BYE AUTO-ADVANCE em R2+)
-        // =======================================================================
+        // CORRECTION LOGIC (BYE vs BYE AUTO-ADVANCE in R2+)
 
         const topName = topSlot.dataset.playerName;
         const bottomName = bottomSlot.dataset.playerName;
 
         if (topName === 'BYE' && bottomName === 'BYE') {
             console.warn(`[R2+ Auto-Advance] BYE vs BYE detectado em ${nextMatchID}. Avançando um BYE.`);
-            // Chama a função para avançar o BYE e DEPOIS RETORNA.
+            // Call the function to advance the BYE and THEN RETURN.
             setTimeout(() => advanceWinner(nextMatchID, 'BYE'), 100);
-            return; // <<-- ESSENCIAL: Interrompe o processamento para este match.
+            return; // <<-- ESSENTIAL: Stops processing for this match.
         }
         
-        // =======================================================================
         // 5. Next Match Clickability Control
-        // =======================================================================
+       
 
         // Generic click function for the next match.
         const matchClickHandler = function () {
